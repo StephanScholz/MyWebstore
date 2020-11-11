@@ -67,6 +67,14 @@ a {
 .SubmitButton {
     display: inline-block;
 }
+/* CartItems
+-------------------------------------------------- */
+.CheckoutButton {
+    background-color: #FFB89E;
+    border: 1px solid #FF7F50;
+    border-radius: 5px;
+}
+
     /* Sticky footer styles
 -------------------------------------------------- */
     html {

@@ -8,6 +8,7 @@ namespace MyWebstore.Models
     public class CartViewModel : ViewModelBase
     {
         public IEnumerable<CartItem> CartItemList { get; set; }
+        public decimal? PriceSum { get; set; }
         public CartItem CartItem { get; set; }
     }
 }

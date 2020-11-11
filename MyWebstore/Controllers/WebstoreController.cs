@@ -29,6 +29,22 @@ namespace MyWebstore.Controllers
             return View(cartViewModel);
         }
 
+        // GET: /Webstore/Details
+        public async Task<IActionResult> Details(int storeItemId)
+        {
+            storeViewModel.StoreItemList = await _context.StoreItem.ToListAsync();
+            foreach(var item in storeViewModel.StoreItemList)
+            {
+                if (item.Id == storeItemId)
+                {
+                    StoreViewModel model = new StoreViewModel();
+                    model.CurrentStoreItem = item;
+                    return View(model);
+                }
+            }
+            return View(new StoreItem());
+        }
+
         // POST: /Webstore/Cart
         [HttpPost]
         public async Task<IActionResult> AddToShoppingCart(IFormCollection formObject)

@@ -8,6 +8,6 @@ namespace MyWebstore.Models
     public class StoreViewModel : ViewModelBase
     {
         public IEnumerable<StoreItem> StoreItemList { get; set; }
-        public StoreItem StoreItem { get; set; }
+        public StoreItem CurrentStoreItem { get; set; }
     }
 }

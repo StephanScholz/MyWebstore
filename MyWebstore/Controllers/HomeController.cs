@@ -19,11 +19,6 @@ namespace MyWebstore.Controllers
             return View(cartViewModel);
         }
 
-        public IActionResult Privacy()
-        {
-            return View(cartViewModel);
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -24,36 +24,63 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.CartItemList)
-        {
+        @{
+
+            decimal? sum = 0;
+
+            foreach (var item in Model.CartItemList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreItem.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreItem.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreItem.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        <div class="AmountDelete">
+                            @using (Html.BeginForm("DeleteCartItem", "Webstore"))
+                            {
+                                @Html.DropDownListFor(c => c.CartItem.Amount,
+             Enumerable.Range(1, item.Amount).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                                <input id="cartItemId" name="cartItemId" type="hidden" value=@item.Id />
+                                <input class="SubmitButton" type="submit" value="Delete" />
+                            }
+                        </div>
+                    </td>
+                </tr>
+
+                sum = sum + (item.Amount * item.StoreItem.Price);
+            }
+
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StoreItem.Title)
+                    <b>Total</b>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StoreItem.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StoreItem.Price)
+                    <b>@sum &#128;</b>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    <div class="AmountDelete">
-                        @using (Html.BeginForm("DeleteCartItem", "Webstore"))
-                        {
-                            @Html.DropDownListFor(c => c.CartItem.Amount,
-                                Enumerable.Range(1, item.Amount).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-                            <input id="cartItemId" name="cartItemId" type="hidden" value=@item.Id />
-                            <input class="SubmitButton" type="submit" value="Delete" />
-                        }
-                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+@using (Html.BeginForm("CartCheckout", "Webstore")) {
+    
+}
+<input class="CheckoutButton" type="submit" value="Checkout" />
+<br/><br/>
 <div>
     <a asp-action="Index">Back to the Shop</a>
 </div>

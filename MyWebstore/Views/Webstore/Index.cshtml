@@ -14,14 +14,15 @@
     <div class="StoreItemContainer">
         @using (Html.BeginForm("AddToShoppingCart", "Webstore"))
         {
+            <input id="storeItemId" name="storeItemId" type="hidden" value=@item.Id />
+
             <div class="StoreItem">
-                <a id="StoreItemLink" href="stephanscholz.at">
+                <a asp-action="Details" asp-route-storeItemId="@item.Id" id="StoreItemLink">
                     <table class="table">
                         <tbody>
                             <tr>
                                 <td style="width:20%">
                                     @Html.DisplayFor(modelItem => item.Title)
-                                    <input id="storeItemId" name="storeItemId" type="hidden" value=@item.Id />
                                 </td>
                                 <td style="width:60%">
                                     @Html.DisplayFor(modelItem => item.Description)
