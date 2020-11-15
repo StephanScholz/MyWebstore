@@ -12,7 +12,7 @@ namespace MyWebstore.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(WebstoreContext context) : base(context) { }
+        public HomeController(MyWebstoreContext context) : base(context) { }
 
         public IActionResult Index()
         {

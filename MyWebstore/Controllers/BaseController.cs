@@ -12,11 +12,11 @@ namespace MyWebstore.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected readonly WebstoreContext _context;
+        protected readonly MyWebstoreContext _context;
         protected readonly StoreViewModel storeViewModel;
         protected readonly CartViewModel cartViewModel;
         public int CartItemAmount { get; set; }
-        public BaseController(WebstoreContext context) : base() {
+        public BaseController(MyWebstoreContext context) : base() {
             _context = context;
             storeViewModel = new StoreViewModel();
             cartViewModel = new CartViewModel();

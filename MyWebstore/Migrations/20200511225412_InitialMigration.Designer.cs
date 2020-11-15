@@ -8,7 +8,7 @@ using MyWebstore.Data;
 
 namespace MyWebstore.Migrations
 {
-    [DbContext(typeof(WebstoreContext))]
+    [DbContext(typeof(MyWebstoreContext))]
     [Migration("20200511225412_InitialMigration")]
     partial class InitialMigration
     {

@@ -7,7 +7,12 @@ namespace MyWebstore.Models
 {
     public class StoreViewModel : ViewModelBase
     {
+        public StoreViewModel(StoreItem item)
+        {
+            StoreItem = item;
+        }
+        public StoreViewModel() { }
         public IEnumerable<StoreItem> StoreItemList { get; set; }
-        public StoreItem CurrentStoreItem { get; set; }
+        public StoreItem StoreItem { get; set; }
     }
 }

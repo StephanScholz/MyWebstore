@@ -13,7 +13,7 @@ namespace MyWebstore.Controllers
 {
     public class WebstoreController : BaseController
     {
-        public WebstoreController(WebstoreContext context) : base(context) { }
+        public WebstoreController(MyWebstoreContext context) : base(context) { }
 
         // GET: /Webstore/
         public async Task<IActionResult> Index()
@@ -38,7 +38,7 @@ namespace MyWebstore.Controllers
                 if (item.Id == storeItemId)
                 {
                     StoreViewModel model = new StoreViewModel();
-                    model.CurrentStoreItem = item;
+                    model.StoreItem = item;
                     return View(model);
                 }
             }

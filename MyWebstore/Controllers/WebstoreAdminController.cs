@@ -12,7 +12,7 @@ namespace MyWebstore.Controllers
 {
     public class WebstoreAdminController : BaseController
     {
-        public WebstoreAdminController(WebstoreContext context) : base(context) { }
+        public WebstoreAdminController(MyWebstoreContext context) : base(context) { }
 
         // GET: WebstoreAdmin
         public async Task<IActionResult> Index()
@@ -36,7 +36,7 @@ namespace MyWebstore.Controllers
                 return NotFound();
             }
 
-            return View(storeItem);
+            return View(new StoreViewModel(storeItem));
         }
 
         // GET: WebstoreAdmin/Create
@@ -58,7 +58,7 @@ namespace MyWebstore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(storeItem);
+            return View(new StoreViewModel(storeItem));
         }
 
         // GET: WebstoreAdmin/Edit/5
@@ -74,7 +74,7 @@ namespace MyWebstore.Controllers
             {
                 return NotFound();
             }
-            return View(storeItem);
+            return View(new StoreViewModel(storeItem));
         }
 
         // POST: WebstoreAdmin/Edit/5
@@ -109,7 +109,7 @@ namespace MyWebstore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(storeItem);
+            return View(new StoreViewModel(storeItem));
         }
 
         // GET: WebstoreAdmin/Delete/5
@@ -127,7 +127,7 @@ namespace MyWebstore.Controllers
                 return NotFound();
             }
 
-            return View(storeItem);
+            return View(new StoreViewModel(storeItem));
         }
 
         // POST: WebstoreAdmin/Delete/5

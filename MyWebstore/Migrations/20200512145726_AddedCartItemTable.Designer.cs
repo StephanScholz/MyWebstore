@@ -9,7 +9,7 @@ using MyWebstore.Data;
 
 namespace MyWebstore.Migrations
 {
-    [DbContext(typeof(WebstoreContext))]
+    [DbContext(typeof(MyWebstoreContext))]
     [Migration("20200512145726_AddedCartItemTable")]
     partial class AddedCartItemTable
     {

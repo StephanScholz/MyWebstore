@@ -1,4 +1,4 @@
-﻿@model MyWebstore.Models.StoreItem
+﻿@model MyWebstore.Models.StoreViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,21 +12,21 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="StoreItem.Id" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="StoreItem.Title" class="control-label"></label>
+                <input asp-for="StoreItem.Title" class="form-control" />
+                <span asp-validation-for="StoreItem.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="StoreItem.Description" class="control-label"></label>
+                <input asp-for="StoreItem.Description" class="form-control" />
+                <span asp-validation-for="StoreItem.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="StoreItem.Price" class="control-label"></label>
+                <input asp-for="StoreItem.Price" class="form-control" />
+                <span asp-validation-for="StoreItem.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
