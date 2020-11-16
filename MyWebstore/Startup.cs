@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyWebstore.Areas.Identity.Data;
 using MyWebstore.Data;
 using MyWebstore.Models;
 
@@ -40,7 +42,7 @@ namespace MyWebstore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +69,26 @@ namespace MyWebstore
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateUserRoles(serviceProvider).Wait();
+        }
+
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<MyWebstoreUser>>();
+
+            IdentityResult roleResult;
+            // Adding the Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Administrator");
+            if (!roleCheck)
+            {
+                // Create the roles and seed them to database
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Administrator"));
+            }
+            // Assign Admin role to the user
+            MyWebstoreUser user = await UserManager.FindByEmailAsync("stephan.scholz@gmx.at");
+            await UserManager.AddToRoleAsync(user, "Administrator");
         }
     }
 }
