@@ -14,7 +14,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ConfirmEmailChangeModel : ViewModelBase
+    public class ConfirmEmailChangeModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly SignInManager<MyWebstoreUser> _signInManager;

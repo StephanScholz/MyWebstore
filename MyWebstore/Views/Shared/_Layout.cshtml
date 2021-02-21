@@ -1,6 +1,4 @@
-﻿@model MyWebstore.Models.ViewModelBase
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -41,17 +39,6 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Webstore" asp-action="Cart">
                                 <img id="CartImage" src="~/Images/shopping_cart.png" />
-                                @{
-                                    string itemAmount = "";
-                                    if (Model != null)
-                                    {
-                                        if (Model.CartItemAmount != 0)
-                                        {
-                                            itemAmount = Model.CartItemAmount.ToString();
-                                        }
-                                    }
-                                }
-                                @itemAmount
                             </a>
                         </li>
                     </ul>

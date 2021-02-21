@@ -16,7 +16,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ForgotPasswordModel : ViewModelBase
+    public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly IEmailSender _emailSender;

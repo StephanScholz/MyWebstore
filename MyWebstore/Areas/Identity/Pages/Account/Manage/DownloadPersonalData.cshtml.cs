@@ -13,7 +13,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class DownloadPersonalDataModel : ViewModelBase
+    public class DownloadPersonalDataModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly ILogger<DownloadPersonalDataModel> _logger;

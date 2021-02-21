@@ -8,7 +8,7 @@ namespace MyWebstore.Areas.Identity.Pages
 {
     [AllowAnonymous]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public class ErrorModel : ViewModelBase
+    public class ErrorModel : PageModel
     {
         public string RequestId { get; set; }
 

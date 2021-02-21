@@ -12,7 +12,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterConfirmationModel : ViewModelBase
+    public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly IEmailSender _sender;

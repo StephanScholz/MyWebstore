@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyWebstore.Models
 {
-    public class StoreViewModel : ViewModelBase
+    public class StoreViewModel
     {
         public StoreViewModel(StoreItem item)
         {

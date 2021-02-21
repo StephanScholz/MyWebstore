@@ -15,7 +15,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class EnableAuthenticatorModel : ViewModelBase
+    public class EnableAuthenticatorModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly ILogger<EnableAuthenticatorModel> _logger;

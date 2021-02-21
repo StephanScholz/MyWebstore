@@ -19,7 +19,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : ViewModelBase
+    public class RegisterModel : PageModel
     {
         private readonly SignInManager<MyWebstoreUser> _signInManager;
         private readonly UserManager<MyWebstoreUser> _userManager;
@@ -77,6 +77,8 @@ namespace MyWebstore.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new MyWebstoreUser { UserName = Input.Email, Email = Input.Email };
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

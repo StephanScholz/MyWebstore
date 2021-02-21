@@ -11,7 +11,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class ExternalLoginsModel : ViewModelBase
+    public class ExternalLoginsModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly SignInManager<MyWebstoreUser> _signInManager;

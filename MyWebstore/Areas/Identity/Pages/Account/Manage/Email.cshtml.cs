@@ -15,7 +15,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public partial class EmailModel : ViewModelBase
+    public partial class EmailModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly SignInManager<MyWebstoreUser> _signInManager;

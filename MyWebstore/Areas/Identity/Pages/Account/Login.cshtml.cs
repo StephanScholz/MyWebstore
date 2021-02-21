@@ -17,7 +17,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class LoginModel : ViewModelBase
+    public class LoginModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly SignInManager<MyWebstoreUser> _signInManager;

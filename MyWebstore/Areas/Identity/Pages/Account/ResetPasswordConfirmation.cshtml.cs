@@ -9,7 +9,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ResetPasswordConfirmationModel : ViewModelBase
+    public class ResetPasswordConfirmationModel : PageModel
     {
         public void OnGet()
         {

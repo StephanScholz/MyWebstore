@@ -12,7 +12,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class ChangePasswordModel : ViewModelBase
+    public class ChangePasswordModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly SignInManager<MyWebstoreUser> _signInManager;

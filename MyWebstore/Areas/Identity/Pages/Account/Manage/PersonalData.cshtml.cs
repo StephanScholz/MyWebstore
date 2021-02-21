@@ -8,7 +8,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class PersonalDataModel : ViewModelBase
+    public class PersonalDataModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;

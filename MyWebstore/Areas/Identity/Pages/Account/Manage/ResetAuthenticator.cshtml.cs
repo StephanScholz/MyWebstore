@@ -11,7 +11,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class ResetAuthenticatorModel : ViewModelBase
+    public class ResetAuthenticatorModel : PageModel
     {
         UserManager<MyWebstoreUser> _userManager;
         private readonly SignInManager<MyWebstoreUser> _signInManager;

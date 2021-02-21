@@ -8,31 +8,48 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWebstore.Data;
 using MyWebstore.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using MyWebstore.Areas.Identity.Data;
 
 namespace MyWebstore.Controllers
 {
     public class WebstoreController : BaseController
     {
-        public WebstoreController(MyWebstoreContext context) : base(context) { }
+        private readonly UserManager<MyWebstoreUser> _userManager;
+        public WebstoreController(UserManager<MyWebstoreUser> userManager, MyWebstoreContext context) : base(context) 
+        {
+            _userManager = userManager;
+        }
 
         // GET: /Webstore/
         public async Task<IActionResult> Index()
         {
-            storeViewModel.StoreItemList = await _context.StoreItem.ToListAsync();
+            storeViewModel.StoreItemList = await _context.StoreItems.ToListAsync();
             return View(storeViewModel);
         }
 
         // GET: /Webstore/Cart
          public async Task<IActionResult> Cart()
         {
-            cartViewModel.CartItemList = await _context.CartItem.Include(x => x.StoreItem).ToListAsync();
-            return View(cartViewModel);
+            string userId = _userManager.GetUserId(User);
+
+            List<ShoppingCart> cartList = new List<ShoppingCart>();
+
+            // Check if cart for logged in user exists
+            // if not, create entries in User_ShoppingCart and a new ShoppingCart (empty)
+            cartList = await _context.ShoppingCarts
+            .Where(w => w.User.Id == userId)
+            .Include(x => x.StoreItem)
+            .ToListAsync();
+            
+            return View(cartList);
         }
 
         // GET: /Webstore/Details
         public async Task<IActionResult> Details(int storeItemId)
         {
-            storeViewModel.StoreItemList = await _context.StoreItem.ToListAsync();
+            storeViewModel.StoreItemList = await _context.StoreItems.ToListAsync();
             foreach(var item in storeViewModel.StoreItemList)
             {
                 if (item.Id == storeItemId)
@@ -54,45 +71,56 @@ namespace MyWebstore.Controllers
             // Getting the Amount from the form
             int amount = Int32.Parse(formObject["Amount"].ToString());
 
-            CreateCartItem(storeItemId, amount);
+            var currentUser = await _userManager.GetUserAsync(User);
+            CreateCartItem(storeItemId, amount, currentUser);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Cart));
         }
 
-        private void CreateCartItem(int storeItemId, int amount)
+        private void CreateCartItem(int storeItemId, int amount, MyWebstoreUser user)
         {
             // Query to get the StoreItem from the Model
-            var storeItemList = from s in _context.StoreItem select s;
+            var storeItemList = from s in _context.StoreItems select s;
             storeItemList = storeItemList.Where(s => s.Id == storeItemId);
 
+            // Get the User Id
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             // Query to get the CartItem
-            var cartItemList = from c in _context.CartItem select c;
-            cartItemList = cartItemList.Include(x => x.StoreItem).Where(c => c.StoreItem.Id == storeItemId);
+
+            var cartItemList = _context.ShoppingCarts
+                .Where(z => z.User.Id == userId);
 
             if (cartItemList.Any())
             {
-                CartItem cartItem = cartItemList.First();
+                ShoppingCart cartItem = cartItemList.First();
                 cartItem.Amount += amount;
                 _context.Update(cartItem);
             }
             else if (storeItemList.Any())
             {
-                CartItem cartItem = new CartItem
+                ShoppingCart cartItem = new ShoppingCart
                 {
                     StoreItem = storeItemList.First(),
-                    Amount = amount
+                    Amount = amount,
+                    User = user
                 };
                 _context.Add(cartItem);
             }
+            
         }
 
         public async Task<IActionResult> DeleteCartItem(IFormCollection formObject)
         {
+            var user = await _userManager.GetUserAsync(User);
+            
             int cartItemId = Int32.Parse(formObject["cartItemId"].ToString());
-            int deleteAmount = Int32.Parse(formObject["CartItem.Amount"].ToString());
+            int deleteAmount = Int32.Parse(formObject["item.Amount"].ToString());
 
-            var cartItem = await _context.CartItem.FindAsync(cartItemId);
+            var cartItem = await _context.ShoppingCarts
+                .Where(x => x.User.Id == user.Id && x.StoreItem.Id == cartItemId)
+                .FirstOrDefaultAsync();
             if (cartItem.Amount > deleteAmount)
             {
                 cartItem.Amount -= deleteAmount;
@@ -103,6 +131,7 @@ namespace MyWebstore.Controllers
                 _context.Remove(cartItem);
             }
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Cart));
         }
     }

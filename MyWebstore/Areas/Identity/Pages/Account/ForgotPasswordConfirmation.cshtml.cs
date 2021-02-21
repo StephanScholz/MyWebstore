@@ -8,7 +8,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ForgotPasswordConfirmation : ViewModelBase
+    public class ForgotPasswordConfirmation : PageModel
     {
         public void OnGet()
         {

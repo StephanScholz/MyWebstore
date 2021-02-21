@@ -14,7 +14,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class LoginWithRecoveryCodeModel : ViewModelBase
+    public class LoginWithRecoveryCodeModel : PageModel
     {
         private readonly SignInManager<MyWebstoreUser> _signInManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> _logger;

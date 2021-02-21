@@ -14,15 +14,12 @@ namespace MyWebstore.Controllers
     {
         protected readonly MyWebstoreContext _context;
         protected readonly StoreViewModel storeViewModel;
-        protected readonly CartViewModel cartViewModel;
-        public int CartItemAmount { get; set; }
+        protected readonly ShoppingCart shoppingCart;
+        //public int CartItemAmount { get; set; }
         public BaseController(MyWebstoreContext context) : base() {
             _context = context;
             storeViewModel = new StoreViewModel();
-            cartViewModel = new CartViewModel();
-
-            storeViewModel.CartItemAmount = _context.CartItem.ToList().Count();
-            cartViewModel.CartItemAmount = _context.CartItem.ToList().Count();
+            shoppingCart = new ShoppingCart();
         }
     }
 }

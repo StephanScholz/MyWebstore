@@ -219,7 +219,7 @@ namespace MyWebstore.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MyWebstore.Models.CartItem", b =>
+            modelBuilder.Entity("MyWebstore.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,11 +232,16 @@ namespace MyWebstore.Migrations
                     b.Property<int?>("StoreItemId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("StoreItemId");
 
-                    b.ToTable("CartItem");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("MyWebstore.Models.StoreItem", b =>
@@ -261,7 +266,29 @@ namespace MyWebstore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StoreItem");
+                    b.ToTable("StoreItems");
+                });
+
+            modelBuilder.Entity("MyWebstore.Models.User_ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Users_ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -315,11 +342,26 @@ namespace MyWebstore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyWebstore.Models.CartItem", b =>
+            modelBuilder.Entity("MyWebstore.Models.ShoppingCart", b =>
                 {
                     b.HasOne("MyWebstore.Models.StoreItem", "StoreItem")
                         .WithMany()
                         .HasForeignKey("StoreItemId");
+
+                    b.HasOne("MyWebstore.Areas.Identity.Data.MyWebstoreUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("MyWebstore.Models.User_ShoppingCart", b =>
+                {
+                    b.HasOne("MyWebstore.Models.ShoppingCart", "ShoppingCart")
+                        .WithMany()
+                        .HasForeignKey("ShoppingCartId");
+
+                    b.HasOne("MyWebstore.Areas.Identity.Data.MyWebstoreUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

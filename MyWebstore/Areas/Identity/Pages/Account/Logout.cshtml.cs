@@ -13,7 +13,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class LogoutModel : ViewModelBase
+    public class LogoutModel : PageModel
     {
         private readonly SignInManager<MyWebstoreUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;

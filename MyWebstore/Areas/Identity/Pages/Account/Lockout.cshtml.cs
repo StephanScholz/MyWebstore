@@ -9,7 +9,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class LockoutModel : ViewModelBase
+    public class LockoutModel : PageModel
     {
         public void OnGet()
         {

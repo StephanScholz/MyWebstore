@@ -11,7 +11,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class ShowRecoveryCodesModel : ViewModelBase
+    public class ShowRecoveryCodesModel : PageModel
     {
         [TempData]
         public string[] RecoveryCodes { get; set; }

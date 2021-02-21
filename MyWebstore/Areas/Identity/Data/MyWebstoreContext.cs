@@ -24,7 +24,9 @@ namespace MyWebstore.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-        public DbSet<StoreItem> StoreItem { get; set; }
-        public DbSet<CartItem> CartItem { get; set; }
+        public DbSet<StoreItem> StoreItems { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<User_ShoppingCart> Users_ShoppingCarts { get; set; }
+        public DbSet<MyWebstoreUser> MyWebstoreUsers { get; set; }
     }
 }

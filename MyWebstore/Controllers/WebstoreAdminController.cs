@@ -17,7 +17,7 @@ namespace MyWebstore.Controllers
         // GET: WebstoreAdmin
         public async Task<IActionResult> Index()
         {
-            storeViewModel.StoreItemList = await _context.StoreItem.ToListAsync();
+            storeViewModel.StoreItemList = await _context.StoreItems.ToListAsync();
             return View(storeViewModel);
         }
 
@@ -29,7 +29,7 @@ namespace MyWebstore.Controllers
                 return NotFound();
             }
 
-            var storeItem = await _context.StoreItem
+            var storeItem = await _context.StoreItems
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (storeItem == null)
             {
@@ -69,7 +69,7 @@ namespace MyWebstore.Controllers
                 return NotFound();
             }
 
-            var storeItem = await _context.StoreItem.FindAsync(id);
+            var storeItem = await _context.StoreItems.FindAsync(id);
             if (storeItem == null)
             {
                 return NotFound();
@@ -120,7 +120,7 @@ namespace MyWebstore.Controllers
                 return NotFound();
             }
 
-            var storeItem = await _context.StoreItem
+            var storeItem = await _context.StoreItems
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (storeItem == null)
             {
@@ -135,22 +135,16 @@ namespace MyWebstore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            // Does a cartItem with this StoreItem.Id exist?
-            var cartItem = from i in _context.CartItem select i;
-            cartItem = cartItem.Where(i => i.StoreItem.Id.Equals(id));
-            // If a cartItem exists, remove it from the table
-            if (cartItem.Any()) _context.CartItem.Remove(cartItem.First());
-
             // Remove the storeItem from the table
-            var storeItem = await _context.StoreItem.FindAsync(id);
-            _context.StoreItem.Remove(storeItem);
+            var storeItem = await _context.StoreItems.FindAsync(id);
+            _context.StoreItems.Remove(storeItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StoreItemExists(int id)
         {
-            return _context.StoreItem.Any(e => e.Id == id);
+            return _context.StoreItems.Any(e => e.Id == id);
         }
     }
 }

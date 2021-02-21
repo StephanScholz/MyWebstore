@@ -19,7 +19,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ExternalLoginModel : ViewModelBase
+    public class ExternalLoginModel : PageModel
     {
         private readonly SignInManager<MyWebstoreUser> _signInManager;
         private readonly UserManager<MyWebstoreUser> _userManager;

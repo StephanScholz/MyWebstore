@@ -15,7 +15,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ResetPasswordModel : ViewModelBase
+    public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
 

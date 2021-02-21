@@ -14,7 +14,7 @@ using MyWebstore.Models;
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class LoginWith2faModel : ViewModelBase
+    public class LoginWith2faModel : PageModel
     {
         private readonly SignInManager<MyWebstoreUser> _signInManager;
         private readonly ILogger<LoginWith2faModel> _logger;

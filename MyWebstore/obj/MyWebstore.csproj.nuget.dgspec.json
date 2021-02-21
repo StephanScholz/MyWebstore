@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Stephan\\Source\\Repos\\MyWebstore\\MyWebstore\\MyWebstore.csproj": {}
+    "C:\\Users\\sirka\\Source\\Repos\\MyASPWebstore\\MyWebstore\\MyWebstore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Stephan\\Source\\Repos\\MyWebstore\\MyWebstore\\MyWebstore.csproj": {
+    "C:\\Users\\sirka\\Source\\Repos\\MyASPWebstore\\MyWebstore\\MyWebstore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Stephan\\Source\\Repos\\MyWebstore\\MyWebstore\\MyWebstore.csproj",
+        "projectUniqueName": "C:\\Users\\sirka\\Source\\Repos\\MyASPWebstore\\MyWebstore\\MyWebstore.csproj",
         "projectName": "MyWebstore",
-        "projectPath": "C:\\Users\\Stephan\\Source\\Repos\\MyWebstore\\MyWebstore\\MyWebstore.csproj",
-        "packagesPath": "C:\\Users\\Stephan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Stephan\\Source\\Repos\\MyWebstore\\MyWebstore\\obj\\",
+        "projectPath": "C:\\Users\\sirka\\Source\\Repos\\MyASPWebstore\\MyWebstore\\MyWebstore.csproj",
+        "packagesPath": "C:\\Users\\sirka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sirka\\Source\\Repos\\MyASPWebstore\\MyWebstore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Stephan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sirka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

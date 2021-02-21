@@ -7,7 +7,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account
 {
-    public class AccessDeniedModel : ViewModelBase
+    public class AccessDeniedModel
     {
         public void OnGet()
         {

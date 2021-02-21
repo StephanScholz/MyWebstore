@@ -11,7 +11,7 @@ using MyWebstore.Models;
 
 namespace MyWebstore.Areas.Identity.Pages.Account.Manage
 {
-    public class GenerateRecoveryCodesModel : ViewModelBase
+    public class GenerateRecoveryCodesModel : PageModel
     {
         private readonly UserManager<MyWebstoreUser> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;

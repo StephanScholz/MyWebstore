@@ -1,4 +1,4 @@
-﻿@model MyWebstore.Models.CartViewModel
+﻿@model List<MyWebstore.Models.ShoppingCart>
 
 @{
     ViewData["Title"] = "Your Cart";
@@ -10,16 +10,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CartItem.StoreItem.Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CartItem.StoreItem.Description)
+                Description
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CartItem.StoreItem.Price)
+                Price
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CartItem.Amount)
+                Amount
             </th>
         </tr>
     </thead>
@@ -28,7 +28,7 @@
 
             decimal? sum = 0;
 
-            foreach (var item in Model.CartItemList)
+            foreach (var item in Model)
             {
                 <tr>
                     <td>
@@ -47,9 +47,9 @@
                         <div class="AmountDelete">
                             @using (Html.BeginForm("DeleteCartItem", "Webstore"))
                             {
-                                @Html.DropDownListFor(c => c.CartItem.Amount,
-             Enumerable.Range(1, item.Amount).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-                                <input id="cartItemId" name="cartItemId" type="hidden" value=@item.Id />
+                                @Html.DropDownListFor(c => item.Amount,
+                                    Enumerable.Range(1, item.Amount).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                                <input id="cartItemId" name="cartItemId" type="hidden" value=@item.StoreItem.Id />
                                 <input class="SubmitButton" type="submit" value="Delete" />
                             }
                         </div>
