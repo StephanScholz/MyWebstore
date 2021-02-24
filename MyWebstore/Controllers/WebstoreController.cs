@@ -81,28 +81,29 @@ namespace MyWebstore.Controllers
         private void CreateCartItem(int storeItemId, int amount, MyWebstoreUser user)
         {
             // Query to get the StoreItem from the Model
-            var storeItemList = from s in _context.StoreItems select s;
-            storeItemList = storeItemList.Where(s => s.Id == storeItemId);
+            var storeItem = _context.StoreItems
+                .Where(s => s.Id == storeItemId)
+                .FirstOrDefault();
 
             // Get the User Id
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // Query to get the CartItem
 
-            var cartItemList = _context.ShoppingCarts
-                .Where(z => z.User.Id == userId);
+            var cartItem = _context.ShoppingCarts
+                .Where(z => z.User.Id == userId && z.StoreItem.Id == storeItem.Id)
+                .FirstOrDefault();
 
-            if (cartItemList.Any())
+            if (cartItem != default(ShoppingCart))
             {
-                ShoppingCart cartItem = cartItemList.First();
                 cartItem.Amount += amount;
                 _context.Update(cartItem);
             }
-            else if (storeItemList.Any())
+            else
             {
-                ShoppingCart cartItem = new ShoppingCart
+                cartItem = new ShoppingCart
                 {
-                    StoreItem = storeItemList.First(),
+                    StoreItem = storeItem,
                     Amount = amount,
                     User = user
                 };

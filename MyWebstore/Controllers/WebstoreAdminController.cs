@@ -137,6 +137,10 @@ namespace MyWebstore.Controllers
         {
             // Remove the storeItem from the table
             var storeItem = await _context.StoreItems.FindAsync(id);
+            var scItems = await _context.ShoppingCarts
+                .Where(x => x.StoreItem == storeItem)
+                .ToListAsync();
+            _context.ShoppingCarts.RemoveRange(scItems);
             _context.StoreItems.Remove(storeItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
